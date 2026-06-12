@@ -339,13 +339,18 @@
             margin: 20px 0;
         }
 
-        /* موبایل */
+/* موبایل */
         @media (max-width: 600px) {
-            .hallway { gap: 20px !important; padding: 10px; }
-            .door-title { font-size: 16px; margin-bottom: 10px; }
-            .door-frame { height: 240px; width: 140px; }
+            .hallway { 
+                gap: 20px !important; 
+                padding: 10px !important; 
+                flex-direction: column !important; /* درها زیر هم قرار می‌گیرند */
+                align-items: center !important; 
+            }
+            .door-title { font-size: 16px; margin-bottom: 5px; }
+            .door-frame { height: 250px !important; width: 160px !important; }
             .door { font-size: 16px; }
-            .world-content { padding: 20px 15px; width: 95%; }
+            .world-content { padding: 20px 15px !important; width: 92% !important; }
             .world h2 { font-size: 20px; margin-bottom: 15px; }
             .links-grid a { font-size: 13px; padding: 12px 10px; }
             .links-grid a i { font-size: 20px; }
@@ -353,14 +358,6 @@
             .back-btn { font-size: 14px; padding: 8px 20px; }
             .main-footer { font-size: 12px; }
         }
-
-        @media (max-width: 400px) {
-            .door-frame { height: 240px; width: 140px; }
-            .door-title { font-size: 16px; margin-bottom: 14px; }
-        }
-    </style>
-</head>
-<body>
 
     <!-- صفحه اول: راهرو -->
     <div class="hallway" id="hallway">
