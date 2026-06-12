@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>هلدینگ صداقتیون</title>
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://v1.fontapi.ir/css/Vazir');
@@ -18,7 +17,6 @@
 
         html, body {
             width: 100%;
-            min-height: 100vh;
             min-height: 100dvh;
             background-color: #03070b;
             color: #fff;
@@ -31,19 +29,22 @@
             justify-content: space-between;
             position: relative;
             overflow-x: hidden;
-            padding: env(safe-area-inset-top) env(safe-area-inset-right)
-                     env(safe-area-inset-bottom) env(safe-area-inset-left);
+            min-height: 100dvh;
+            padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
         }
 
-        /* background stars */
+        /* ذرات پس‌زمینه */
         body::before {
             content: '';
             position: fixed;
-            inset: 0;
+            top: 0; left: 0; width: 100%; height: 100%;
             background-image:
-                radial-gradient(2px 2px at 20px 30px, rgba(255,255,255,0.4), transparent),
-                radial-gradient(2px 2px at 90px 40px, rgba(255,255,255,0.5), transparent),
-                radial-gradient(2px 2px at 130px 80px, rgba(255,255,255,0.4), transparent);
+                radial-gradient(2px 2px at 20px 30px, rgba(255,255,255,0.4), rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.6), rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 50px 160px, rgba(255,255,255,0.3), rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 90px 40px, rgba(255,255,255,0.5), rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 130px 80px, rgba(255,255,255,0.4), rgba(0,0,0,0));
+            background-repeat: repeat;
             background-size: 200px 200px;
             animation: floatingStars 100s linear infinite;
             opacity: 0.4;
@@ -52,27 +53,59 @@
         }
 
         @keyframes floatingStars {
-            from { background-position: 0 0; }
-            to { background-position: 1000px 1000px; }
+            0%   { background-position: 0 0; }
+            100% { background-position: 1000px 1000px; }
         }
 
+        /* فوتر */
+        .main-footer {
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #9aafd4;
+            z-index: 10;
+            letter-spacing: 1px;
+            text-align: center;
+            padding: 0 16px;
+            transition: opacity 0.5s;
+        }
+
+        /* نئون زرد */
+        .neon-blink-yellow {
+            color: #fff;
+            text-shadow:
+                0 0 5px #fff,
+                0 0 10px #f5c518,
+                0 0 20px #f5c518,
+                0 0 30px #f5c518;
+            animation: blinker 2s infinite alternate;
+        }
+
+        @keyframes blinker {
+            0%   { opacity: 1; }
+            40%  { opacity: 1; }
+            50%  { opacity: 0.6; text-shadow: none; }
+            60%  { opacity: 1; }
+            100% { opacity: 0.9; }
+        }
+
+        /* راهرو */
         .hallway {
             display: flex;
             gap: 80px;
+            z-index: 10;
+            transition: opacity 0.5s;
             flex-wrap: wrap;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
+            padding: 20px 16px;
             flex: 1;
-            padding: 20px;
-            z-index: 10;
-            transition: 0.5s;
+            align-content: center;
         }
 
         .door-container {
             text-align: center;
             perspective: 1500px;
             cursor: pointer;
-            touch-action: manipulation;
         }
 
         .door-title {
@@ -84,58 +117,87 @@
             width: 200px;
             height: 340px;
             border: 4px solid #1a1200;
+            background-color: #000;
             position: relative;
-            background: #000;
-            border-radius: 8px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.9), inset 0 0 20px rgba(0,0,0,0.8);
+            border-radius: 8px 8px 0 0;
         }
 
+        /* هر دو در — زرد */
         .door {
             position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, #1a1200, #5c4500);
+            top: 0; right: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(135deg, #1a1200 0%, #3d2e00 50%, #5c4500 100%);
             border: 2px solid #f5c518;
+            border-radius: 4px 4px 0 0;
             transform-origin: right;
-            transition: 1s;
+            transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 5;
             display: flex;
             align-items: center;
             justify-content: center;
+            color: #fff;
+            font-weight: 900;
             font-size: 22px;
-            font-weight: bold;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+            letter-spacing: 2px;
         }
 
+        .door::after {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            width: 8px;
+            height: 45px;
+            background: #111;
+            border-radius: 4px;
+            border: 1px solid #f5c518;
+            box-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+        }
+
+        .door:hover {
+            box-shadow: 0 0 20px rgba(245,197,24,0.5), inset 0 0 15px rgba(255,255,255,0.1);
+        }
+
+        /* نور زرد */
         .portal-light {
             position: absolute;
-            inset: 50%;
+            top: 50%; left: 50%;
             transform: translate(-50%, -50%) scale(0);
-            width: 150px;
-            height: 150px;
+            width: 150px; height: 150px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(245,197,24,0.7), transparent);
-            transition: 1s;
+            opacity: 0;
+            background: radial-gradient(circle, rgba(255,255,255,0.95) 0%, rgba(245,197,24,0.7) 30%, rgba(245,197,24,0.15) 60%, transparent 80%);
+            filter: blur(15px);
+            mix-blend-mode: screen;
+            transition: transform 1.5s cubic-bezier(0.8, 0, 0.2, 1), opacity 0.5s;
             z-index: 1;
         }
 
-        .door-container.active .door {
-            transform: rotateY(120deg);
-        }
-
+        .door-container.active .door { transform: rotateY(120deg); }
         .door-container.active .portal-light {
-            transform: translate(-50%, -50%) scale(30);
             opacity: 1;
+            transform: translate(-50%, -50%) scale(40);
         }
 
+        /* دنیاها */
         .world {
             position: fixed;
-            inset: 0;
-            background: radial-gradient(circle, #1a1200, #070400);
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             opacity: 0;
             pointer-events: none;
-            transition: 0.8s;
+            transition: opacity 1s;
             z-index: 20;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
+            background: radial-gradient(circle at center, #1a1200 0%, #070400 100%);
             overflow-y: auto;
+            padding: 20px 16px;
         }
 
         .world.active {
@@ -144,144 +206,287 @@
         }
 
         .world-content {
-            position: relative;
-            z-index: 2;
-            background: rgba(15,10,0,0.9);
-            padding: 30px;
-            border-radius: 20px;
-            width: 90%;
-            max-width: 600px;
+            background: rgba(15, 10, 0, 0.88);
+            padding: 40px 36px;
+            border-radius: 24px;
+            backdrop-filter: blur(20px);
             text-align: center;
+            border: 1px solid rgba(245, 197, 24, 0.25);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 30px rgba(245,197,24,0.07);
+            transform: translateY(40px) scale(0.95);
+            transition: all 1s 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+            width: 100%;
+            max-width: 620px;
         }
 
+        .world.active .world-content {
+            transform: translateY(0) scale(1);
+        }
+
+        .world h2 {
+            font-size: 26px;
+            margin-bottom: 28px;
+            border-bottom: 1px solid rgba(245, 197, 24, 0.2);
+            padding-bottom: 18px;
+        }
+
+        .feature-list {
+            margin-bottom: 22px;
+            text-align: right;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .feature-list p {
+            font-size: 16px;
+            margin-bottom: 12px;
+            color: #e8d48a;
+            line-height: 1.8;
+            position: relative;
+            padding-right: 22px;
+        }
+
+        .feature-list p::before {
+            content: '✦';
+            position: absolute;
+            right: 0;
+            color: #f5c518;
+            font-size: 12px;
+        }
+
+        /* دکمه‌های لینک */
         .links-grid {
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            margin: 20px 0;
+            gap: 14px;
+            margin-bottom: 28px;
         }
 
         .links-grid a {
+            color: #fff;
+            text-decoration: none;
+            padding: 16px 20px;
+            background: rgba(245, 197, 24, 0.05);
+            border: 1px solid rgba(245, 197, 24, 0.3);
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s;
             display: flex;
             justify-content: space-between;
-            padding: 14px;
-            border: 1px solid #f5c518;
-            border-radius: 10px;
-            text-decoration: none;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .links-grid a i {
+            font-size: 24px;
+            color: #f5c518;
+            transition: transform 0.3s;
+            flex-shrink: 0;
+        }
+
+        .links-grid a:hover {
+            background: rgba(245, 197, 24, 0.15);
+            border-color: #f5c518;
+            box-shadow: 0 0 20px rgba(245,197,24,0.3);
+            transform: translateY(-2px);
+        }
+
+        .links-grid a:hover i { transform: scale(1.2); }
+
+        /* ردیف شماره تلفن */
+        .phone-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .phone-name {
+            font-size: 16px;
             color: #fff;
         }
 
+        .phone-number {
+            font-size: 16px;
+            direction: ltr;
+            color: #ccc;
+        }
+
+        /* دکمه بازگشت */
         .back-btn {
-            padding: 10px 25px;
-            border: 1px solid #f5c518;
+            padding: 12px 35px;
             background: transparent;
             color: #f5c518;
-            border-radius: 25px;
+            border: 1px solid #f5c518;
+            border-radius: 30px;
             cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+            font-family: 'Vazir', sans-serif;
         }
 
-        .main-footer {
-            font-size: 13px;
-            color: #9aafd4;
-            margin-bottom: 20px;
-            z-index: 10;
-            transition: 0.5s;
+        .back-btn:hover {
+            background: #f5c518;
+            color: #070400;
+            box-shadow: 0 0 15px rgba(245,197,24,0.6);
+            font-weight: bold;
         }
 
+        /* بخش‌بندی در دنیای دوم */
+        .section-divider {
+            border: none;
+            border-top: 1px solid rgba(245, 197, 24, 0.15);
+            margin: 20px 0;
+        }
+
+        /* موبایل */
         @media (max-width: 600px) {
-            .door-frame { width: 150px; height: 280px; }
+            .hallway { gap: 40px; padding: 16px; }
             .door-title { font-size: 18px; }
+            .door-frame { height: 280px; width: 160px; }
+            .door { font-size: 18px; }
+            .world-content { padding: 28px 20px; }
+            .world h2 { font-size: 20px; }
+            .links-grid a { font-size: 14px; padding: 14px 16px; }
+            .links-grid a i { font-size: 20px; }
+            .feature-list p { font-size: 15px; }
+            .back-btn { font-size: 15px; padding: 10px 28px; }
+            .main-footer { font-size: 13px; }
+        }
+
+        @media (max-width: 400px) {
+            .door-frame { height: 240px; width: 140px; }
+            .door-title { font-size: 16px; margin-bottom: 14px; }
         }
     </style>
 </head>
-
 <body>
 
-<div class="hallway" id="hallway">
+    <!-- صفحه اول: راهرو -->
+    <div class="hallway" id="hallway">
 
-    <div class="door-container" onclick="enterWorld('caspian', event)">
-        <h3 class="door-title">مجموعه کاسپین</h3>
-        <div class="door-frame">
-            <div class="portal-light"></div>
-            <div class="door">ورود</div>
+        <!-- در اول: مجموعه کاسپین -->
+        <div class="door-container" onclick="enterWorld('caspian')">
+            <h3 class="door-title neon-blink-yellow">مجموعه کاسپین</h3>
+            <div class="door-frame">
+                <div class="portal-light"></div>
+                <div class="door">ورود</div>
+            </div>
+        </div>
+
+        <!-- در دوم: دوچرخه سواری کرمانشاه -->
+        <div class="door-container" onclick="enterWorld('cycling')">
+            <h3 class="door-title neon-blink-yellow">دوچرخه سواری کرمانشاه</h3>
+            <div class="door-frame">
+                <div class="portal-light"></div>
+                <div class="door">ورود</div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- فوتر صفحه -->
+    <p class="main-footer">نوشته شده با عشق توسط حسین محمدی</p>
+
+
+    <!-- دنیای اول: مجموعه تخصصی دوچرخه کاسپین -->
+    <div class="world" id="world-caspian">
+        <div class="world-content">
+            <h2 class="neon-blink-yellow">مجموعه تخصصی دوچرخه کاسپین</h2>
+
+            <div class="feature-list">
+                <p>تعمیرات، سرویس، ترمیم و رنگ‌آمیزی</p>
+                <p>ساخت انواع قطعات کربنی</p>
+            </div>
+
+            <div class="links-grid">
+                <a href="https://www.instagram.com/caspian_bike/" target="_blank">
+                    <span>برای ورود به صفحه اینستاگرام و دیدن نمونه کارها کلیک کنین</span>
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="tel:09120365622">
+                    <div class="phone-row">
+                        <span class="phone-name">کریمی <i class="fas fa-phone-alt" style="font-size:15px; margin-right:6px;"></i></span>
+                        <span class="phone-number">0912 036 5622</span>
+                    </div>
+                </a>
+            </div>
+
+            <button class="back-btn" onclick="exitWorld()">بازگشت به صفحه اول</button>
         </div>
     </div>
 
-    <div class="door-container" onclick="enterWorld('cycling', event)">
-        <h3 class="door-title">دوچرخه سواری کرمانشاه</h3>
-        <div class="door-frame">
-            <div class="portal-light"></div>
-            <div class="door">ورود</div>
+
+    <!-- دنیای دوم: دوچرخه سواری کرمانشاه -->
+    <div class="world" id="world-cycling">
+        <div class="world-content">
+            <h2 class="neon-blink-yellow">دوچرخه سواری کرمانشاه</h2>
+
+            <div class="links-grid">
+                <a href="https://www.instagram.com/cycling.19/" target="_blank">
+                    <span>صفحه اطلاع رسانی دوچرخه سواری - اینستاگرام</span>
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://t.me/Cycling_19" target="_blank">
+                    <span>کانال اطلاع رسانی دوچرخه سواری - تلگرام</span>
+                    <i class="fab fa-telegram"></i>
+                </a>
+            </div>
+
+            <hr class="section-divider">
+
+            <div class="feature-list">
+                <p>اولین و برترین مجری تورهای دوچرخه سواری خانوادگی در کرمانشاه</p>
+            </div>
+
+            <div class="links-grid">
+                <a href="https://www.instagram.com/tour.kermanshah/" target="_blank">
+                    <span>صفحه اطلاع رسانی تورهای دوچرخه سواری خانوادگی</span>
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://t.me/Tour_kermanshah19" target="_blank">
+                    <span>کانال اطلاع رسانی تورهای دوچرخه سواری خانوادگی</span>
+                    <i class="fab fa-telegram"></i>
+                </a>
+            </div>
+
+            <button class="back-btn" onclick="exitWorld()">بازگشت به صفحه اول</button>
         </div>
     </div>
 
-</div>
 
-<p class="main-footer">نوشته شده با عشق توسط حسین محمدی</p>
+    <script>
+        const hallway = document.getElementById('hallway');
+        const footer  = document.querySelector('.main-footer');
 
-<!-- WORLD 1 -->
-<div class="world" id="world-caspian">
-    <div class="world-content">
-        <h2>کاسپین</h2>
+        function enterWorld(type) {
+            const container = event.currentTarget;
+            container.classList.add('active');
 
-        <div class="links-grid">
-            <a href="https://instagram.com/caspian_bike/" target="_blank">
-                <span>اینستاگرام</span>
-                <i class="fab fa-instagram"></i>
-            </a>
-        </div>
+            setTimeout(() => {
+                hallway.style.opacity = '0';
+                hallway.style.pointerEvents = 'none';
+                footer.style.opacity = '0';
 
-        <button class="back-btn" onclick="exitWorld()">بازگشت</button>
-    </div>
-</div>
+                if (type === 'caspian') {
+                    document.getElementById('world-caspian').classList.add('active');
+                } else {
+                    document.getElementById('world-cycling').classList.add('active');
+                }
+            }, 1000);
+        }
 
-<!-- WORLD 2 -->
-<div class="world" id="world-cycling">
-    <div class="world-content">
-        <h2>دوچرخه سواری</h2>
+        function exitWorld() {
+            document.querySelectorAll('.world').forEach(w => w.classList.remove('active'));
+            document.querySelectorAll('.door-container').forEach(d => d.classList.remove('active'));
 
-        <div class="links-grid">
-            <a href="https://instagram.com/cycling.19/" target="_blank">
-                <span>اینستاگرام</span>
-                <i class="fab fa-instagram"></i>
-            </a>
-        </div>
-
-        <button class="back-btn" onclick="exitWorld()">بازگشت</button>
-    </div>
-</div>
-
-<script>
-const hallway = document.getElementById('hallway');
-const footer = document.querySelector('.main-footer');
-
-function enterWorld(type, event) {
-    const container = event.currentTarget;
-    container.classList.add('active');
-
-    setTimeout(() => {
-        hallway.style.opacity = '0';
-        hallway.style.pointerEvents = 'none';
-        footer.style.opacity = '0';
-
-        document.getElementById(
-            type === 'caspian' ? 'world-caspian' : 'world-cycling'
-        ).classList.add('active');
-
-    }, 900);
-}
-
-function exitWorld() {
-    document.querySelectorAll('.world').forEach(w => w.classList.remove('active'));
-    document.querySelectorAll('.door-container').forEach(d => d.classList.remove('active'));
-
-    setTimeout(() => {
-        hallway.style.opacity = '1';
-        hallway.style.pointerEvents = 'auto';
-        footer.style.opacity = '1';
-    }, 300);
-}
-</script>
+            setTimeout(() => {
+                hallway.style.opacity = '1';
+                hallway.style.pointerEvents = 'auto';
+                footer.style.opacity = '1';
+            }, 500);
+        }
+    </script>
 
 </body>
 </html>
