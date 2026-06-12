@@ -20,6 +20,7 @@
             min-height: 100dvh;
             background-color: #03070b;
             color: #fff;
+            overflow-x: hidden;
         }
 
         body {
@@ -100,6 +101,7 @@
             padding: 20px 16px;
             flex: 1;
             align-content: center;
+            box-sizing: border-box;
         }
 
         .door-container {
@@ -116,6 +118,8 @@
         .door-frame {
             width: 200px;
             height: 340px;
+            max-width: 42vw;
+            max-height: 72vw;
             border: 4px solid #1a1200;
             background-color: #000;
             position: relative;
@@ -198,6 +202,7 @@
             background: radial-gradient(circle at center, #1a1200 0%, #070400 100%);
             overflow-y: auto;
             padding: 20px 16px;
+            box-sizing: border-box;
         }
 
         .world.active {
@@ -215,8 +220,10 @@
             box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 30px rgba(245,197,24,0.07);
             transform: translateY(40px) scale(0.95);
             transition: all 1s 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
-            width: 100%;
-            max-width: 620px;
+            width: min(100%, 620px);
+            max-height: 90vh;
+            overflow-y: auto;
+            box-sizing: border-box;
         }
 
         .world.active .world-content {
@@ -341,11 +348,11 @@
 
         /* موبایل */
         @media (max-width: 600px) {
-            .hallway { gap: 40px; padding: 16px; }
+            .hallway { gap: 28px; padding: 16px; }
             .door-title { font-size: 18px; }
-            .door-frame { height: 280px; width: 160px; }
+            .door-frame { width: min(42vw, 160px); height: min(72vw, 280px); }
             .door { font-size: 18px; }
-            .world-content { padding: 28px 20px; }
+            .world-content { padding: 28px 20px; width: min(92vw, 620px); max-height: 88vh; overflow-y: auto; }
             .world h2 { font-size: 20px; }
             .links-grid a { font-size: 14px; padding: 14px 16px; }
             .links-grid a i { font-size: 20px; }
@@ -355,8 +362,9 @@
         }
 
         @media (max-width: 400px) {
-            .door-frame { height: 240px; width: 140px; }
+            .door-frame { width: 40vw; height: 68vw; }
             .door-title { font-size: 16px; margin-bottom: 14px; }
+            .world-content { width: 94vw; padding: 22px 16px; }
         }
     </style>
 </head>
