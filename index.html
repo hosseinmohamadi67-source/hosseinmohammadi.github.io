@@ -34,7 +34,6 @@
             padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
         }
 
-        /* ذرات پس‌زمینه */
         body::before {
             content: '';
             position: fixed;
@@ -58,7 +57,19 @@
             100% { background-position: 1000px 1000px; }
         }
 
-        /* فوتر */
+        @keyframes welcomeGlow {
+            0% {
+                opacity: 0.82;
+                text-shadow: 0 0 6px rgba(245,197,24,0.45), 0 0 12px rgba(245,197,24,0.25);
+                filter: drop-shadow(0 0 0 rgba(245,197,24,0));
+            }
+            100% {
+                opacity: 1;
+                text-shadow: 0 0 10px rgba(245,197,24,0.9), 0 0 22px rgba(245,197,24,0.55), 0 0 34px rgba(245,197,24,0.28);
+                filter: drop-shadow(0 0 14px rgba(245,197,24,0.35));
+            }
+        }
+
         .main-footer {
             margin-bottom: 20px;
             font-size: 14px;
@@ -70,7 +81,6 @@
             transition: opacity 0.5s;
         }
 
-        /* نئون زرد */
         .neon-blink-yellow {
             color: #fff;
             text-shadow:
@@ -89,7 +99,6 @@
             100% { opacity: 0.9; }
         }
 
-        /* راهرو */
         .hallway {
             display: flex;
             gap: 80px;
@@ -127,7 +136,6 @@
             border-radius: 8px 8px 0 0;
         }
 
-        /* هر دو در — زرد */
         .door {
             position: absolute;
             top: 0; right: 0;
@@ -165,7 +173,6 @@
             box-shadow: 0 0 20px rgba(245,197,24,0.5), inset 0 0 15px rgba(255,255,255,0.1);
         }
 
-        /* نور زرد */
         .portal-light {
             position: absolute;
             top: 50%; left: 50%;
@@ -186,7 +193,6 @@
             transform: translate(-50%, -50%) scale(40);
         }
 
-        /* دنیاها */
         .world {
             position: fixed;
             top: 0; left: 0;
@@ -261,7 +267,6 @@
             font-size: 12px;
         }
 
-        /* دکمه‌های لینک */
         .links-grid {
             display: flex;
             flex-direction: column;
@@ -300,7 +305,6 @@
 
         .links-grid a:hover i { transform: scale(1.2); }
 
-        /* ردیف شماره تلفن */
         .phone-row {
             display: flex;
             justify-content: space-between;
@@ -319,7 +323,6 @@
             color: #ccc;
         }
 
-        /* دکمه بازگشت */
         .back-btn {
             padding: 12px 35px;
             background: transparent;
@@ -339,14 +342,12 @@
             font-weight: bold;
         }
 
-        /* بخش‌بندی در دنیای دوم */
         .section-divider {
             border: none;
             border-top: 1px solid rgba(245, 197, 24, 0.15);
             margin: 20px 0;
         }
 
-        /* موبایل */
         @media (max-width: 600px) {
             .hallway { gap: 28px; padding: 16px; }
             .door-title { font-size: 18px; }
@@ -370,10 +371,25 @@
 </head>
 <body>
 
-    <!-- صفحه اول: راهرو -->
-    <div class="hallway" id="hallway">
+    <div style="position:relative; z-index:10; margin: 18px 16px 18px; width: min(92vw, 680px); text-align:center;">
+        <div style="
+            display:inline-block;
+            padding: 14px 18px;
+            border-radius: 16px;
+            color:#fff7d1;
+            font-size:16px;
+            line-height:1.9;
+            font-weight:700;
+            letter-spacing:0.2px;
+            text-shadow: 0 0 8px rgba(245,197,24,0.75), 0 0 16px rgba(245,197,24,0.45);
+            animation: welcomeGlow 2s ease-in-out infinite alternate;
+            box-shadow: 0 0 18px rgba(245,197,24,0.12);
+        ">
+            درود، از اینکه به جمع ما اضافه شدین صمیمانه خرسند و مفتخر هستیم.
+        </div>
+    </div>
 
-        <!-- در اول: مجموعه کاسپین -->
+    <div class="hallway" id="hallway">
         <div class="door-container" onclick="enterWorld('caspian')">
             <h3 class="door-title neon-blink-yellow">مجموعه کاسپین</h3>
             <div class="door-frame">
@@ -382,7 +398,6 @@
             </div>
         </div>
 
-        <!-- در دوم: دوچرخه سواری کرمانشاه -->
         <div class="door-container" onclick="enterWorld('cycling')">
             <h3 class="door-title neon-blink-yellow">دوچرخه سواری کرمانشاه</h3>
             <div class="door-frame">
@@ -390,14 +405,10 @@
                 <div class="door">ورود</div>
             </div>
         </div>
-
     </div>
 
-    <!-- فوتر صفحه -->
-    <p class="main-footer">نوشته شده با عشق توسط حسین محمدی</p>
+    <p class="main-footer">ساخته شده با عشق توسط حسین محمدی</p>
 
-
-    <!-- دنیای اول: مجموعه تخصصی دوچرخه کاسپین -->
     <div class="world" id="world-caspian">
         <div class="world-content">
             <h2 class="neon-blink-yellow">مجموعه تخصصی دوچرخه کاسپین</h2>
@@ -412,9 +423,13 @@
                     <span>برای ورود به صفحه اینستاگرام و دیدن نمونه کارها کلیک کنین</span>
                     <i class="fab fa-instagram"></i>
                 </a>
+                <a href="https://t.me/caspian_bike" target="_blank">
+                    <span>لطفا از کانال تلگرام ما دیدن فرمایید.</span>
+                    <i class="fab fa-telegram"></i>
+                </a>
                 <a href="tel:09120365622">
                     <div class="phone-row">
-                        <span class="phone-name">کریمی <i class="fas fa-phone-alt" style="font-size:15px; margin-right:6px;"></i></span>
+                        <span class="phone-name">کریمی</span>
                         <span class="phone-number">0912 036 5622</span>
                     </div>
                 </a>
@@ -424,8 +439,6 @@
         </div>
     </div>
 
-
-    <!-- دنیای دوم: دوچرخه سواری کرمانشاه -->
     <div class="world" id="world-cycling">
         <div class="world-content">
             <h2 class="neon-blink-yellow">دوچرخه سواری کرمانشاه</h2>
@@ -461,7 +474,6 @@
             <button class="back-btn" onclick="exitWorld()">بازگشت به صفحه اول</button>
         </div>
     </div>
-
 
     <script>
         const hallway = document.getElementById('hallway');
