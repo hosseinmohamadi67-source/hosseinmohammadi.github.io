@@ -62,13 +62,14 @@
             to { opacity: 1; transform: scale(1.02); }
         }
 
-        @keyframes typingWelcome {
+        @keyframes typingLine {
             from { width: 0; }
             to { width: 100%; }
         }
 
-        @keyframes caretBlink {
-            50% { border-left-color: transparent; }
+        @keyframes typingLine2 {
+            from { width: 0; }
+            to { width: 100%; }
         }
 
         .main-footer {
@@ -353,34 +354,45 @@
             position: relative;
             z-index: 10;
             margin: 18px 16px 18px;
-            width: min(92vw, 680px);
+            width: min(94vw, 720px);
             display: flex;
             justify-content: center;
         }
 
         .welcome-type {
-            display: inline-block;
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
             position: relative;
-            padding: 14px 18px;
+            padding: 15px 18px;
             border-radius: 16px;
             background: rgba(7, 4, 0, 0.88);
             border: 1px solid rgba(245,197,24,0.28);
             box-shadow: 0 0 18px rgba(245,197,24,0.12), inset 0 0 14px rgba(245,197,24,0.05);
             overflow: hidden;
+            max-width: 100%;
         }
 
-        .welcome-type span {
-            display: inline-block;
+        .welcome-line {
+            display: block;
             color: #fff7d1;
-            font-size: clamp(14px, 2.2vw, 16px);
-            line-height: 1.9;
+            font-size: clamp(16px, 2.8vw, 19px);
+            line-height: 2.05;
             font-weight: 700;
             white-space: nowrap;
             overflow: hidden;
-            border-left: 2px solid #f5c518;
             width: 0;
+            text-align: center;
             text-shadow: 0 0 8px rgba(245,197,24,0.75), 0 0 16px rgba(245,197,24,0.35);
-            animation: typingWelcome 5s steps(62, end) forwards, caretBlink 0.8s step-end infinite, welcomePulse 2.2s ease-in-out infinite alternate;
+        }
+
+        .line-1 {
+            animation: typingLine 2.4s steps(34, end) forwards, welcomePulse 2.2s ease-in-out infinite alternate;
+        }
+
+        .line-2 {
+            animation: typingLine2 2.1s steps(30, end) forwards 2.5s, welcomePulse 2.2s ease-in-out infinite alternate;
         }
 
         .welcome-type::after {
@@ -394,12 +406,18 @@
         }
 
         @media (max-width: 600px) {
+            .welcome-wrap {
+                width: min(96vw, 720px);
+                margin: 12px 10px 14px;
+            }
+
             .welcome-type {
                 padding: 12px 14px;
             }
 
-            .welcome-type span {
-                font-size: 14px;
+            .welcome-line {
+                font-size: 17px;
+                line-height: 2.1;
             }
 
             .hallway { gap: 28px; padding: 16px; }
@@ -422,14 +440,10 @@
         }
 
         @media (prefers-reduced-motion: reduce) {
-            .welcome-type span,
+            .welcome-line,
             .welcome-type::after {
                 animation: none;
-            }
-
-            .welcome-type span {
                 width: auto;
-                border-left-color: transparent;
             }
         }
     </style>
@@ -438,7 +452,8 @@
 
     <div class="welcome-wrap">
         <div class="welcome-type">
-            <span>درود، از اینکه به جمع ما اضافه شدین صمیمانه خرسند و مفتخر هستیم.</span>
+            <span class="welcome-line line-1">درود، از اینکه به جمع ما اضافه شدین</span>
+            <span class="welcome-line line-2">صمیمانه خرسند و مفتخر هستیم.</span>
         </div>
     </div>
 
